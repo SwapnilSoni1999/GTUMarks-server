@@ -1,7 +1,7 @@
 const { Router } = require('express')
 
-const GTUResult = require('../../utils/gtuResult')
-const Result = require('../../models/result')
+const GTUResult = require('../utils/gtuResult')
+const Result = require('../models/result')
 
 const router = Router()
 

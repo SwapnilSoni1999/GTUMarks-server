@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const GTUResult = require('../../utils/gtuResult')
+const GTUResult = require('../utils/gtuResult')
 
 const router = Router()
 

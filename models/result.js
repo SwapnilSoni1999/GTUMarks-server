@@ -15,13 +15,14 @@ const Subjects = new Schema({
 }, { _id: false })
 
 const ResultSchema = new Schema({
-    exType: { type: String, required: true },
+    extype: { type: String, required: true },
+    examId: { type: String, required: true },
     enrollment: { type: String, required: true, unique: true },
     DECLARATIONDATE: { type: Date, required: true },
     sem: { type: Number, required: true },
     name: { type: String, require: true },
     CourseName: { type: String, required: true },
-    ExamNumber: { type: String, required: true, unique: true }, // examId
+    ExamNumber: { type: String, required: true, unique: true }, // seat number
     BR_CODE: { type: Number },
     TOTBACKL: { type: Number },
     CURBACKL: { type: Number },

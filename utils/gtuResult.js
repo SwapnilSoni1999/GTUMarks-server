@@ -65,6 +65,12 @@ class GTUResult {
         for (let sc of subjectCodes) {
             subjectResults.push(await this._subResult(enrollment, examId, sc))
         }
+        // remove 1st empty index
+        for (let i=0; i<subjectResults.length; i++) {
+            if (subjectResults[i]['sub'] == "") {
+                subjectResults.splice(i, 1)
+            }
+        }
         data.subjects = subjectResults
         return data
     }
@@ -134,6 +140,9 @@ class GTUResult {
 
             // RTI
             // fix later
+
+            // add examId at the end so it will be easy to recognize
+            fullResult.examId = examId
 
             return fullResult
         } else {

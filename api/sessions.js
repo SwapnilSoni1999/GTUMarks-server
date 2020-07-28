@@ -6,7 +6,7 @@ const router = Router()
 router.get('/', async (req, res, next) => {
     try {
         const response = await GTUResult.getSession()
-        res.json(response)
+        res.encSend(response)
     } catch (error) {
         res.status(503).json({ message: "Internal server error" })
     }

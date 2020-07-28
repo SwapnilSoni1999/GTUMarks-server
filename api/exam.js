@@ -7,7 +7,7 @@ router.post('/', async (req, res, next) => {
     try {
         const { examSession, examType } = req.body
         const response = await GTUResult.getExam(examSession, examType)
-        res.json(response)
+        res.encSend(response)
     } catch (err) {
         console.log(err)
         res.status(503).json({ message: "Internal server error" })

@@ -2,7 +2,6 @@ const cipher = require('../utils/cipher')
 
 const decryptMiddleware = async (req, res, next) => {
     if (req.headers['content-type'] === 'application/encrypted-json') {
-        console.log("decrypting data")
         const payload = req.body.toString().trim()
         const xKey = req.headers['x-key']
         if (!xKey) {

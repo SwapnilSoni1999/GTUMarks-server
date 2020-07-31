@@ -6,16 +6,17 @@ const privateKey = fs.readFileSync('RSA_private.key', { encoding: 'utf8' })
 console.log("RSA keys loaded!")
 
 const AESiv = new Buffer.alloc(16)
+console.log("iv", AESiv)
 
 exports.RSAencrypt = async (data) => {
     const buffer = Buffer.from(data)
-    const encrypted = crypto.publicEncrypt(publicKey, buffer)
+    const encrypted = crypto.publicEncrypt({ key: publicKey, padding: crypto.constants.RSA_PKCS1_PADDING }, buffer)
     return encrypted.toString('base64')
 }
 
 exports.RSAdecrypt = async (data) => {
     const buffer = Buffer.from(data, "base64")
-    const decrypted = crypto.privateDecrypt(privateKey, buffer)
+    const decrypted = crypto.privateDecrypt({ key: privateKey, padding: crypto.constants.RSA_PKCS1_PADDING }, buffer)
     return decrypted.toString('utf8')
 }
 

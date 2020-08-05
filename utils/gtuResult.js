@@ -98,6 +98,12 @@ class GTUResult {
             responseType: 'json'
         })
         if (res.status == 200 || res.status == 201) {
+            // check if contains json
+            if(res.data == "No Results Found") {
+                return { message: res.data }
+            }
+
+
             // formatting data
 
             // declaration date

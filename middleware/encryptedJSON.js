@@ -7,8 +7,8 @@ const decryptMiddleware = async (req, res, next) => {
         if (!xKey) {
             return res.status(403).json({ message: "No key provided!" })
         }
-        const aesKey = await cipher.RSAdecrypt(xKey)
-        const jsonData = await cipher.AESdecrypt(payload, aesKey)
+        const aesKey = cipher.RSAdecrypt(xKey)
+        const jsonData = cipher.AESdecrypt(payload, aesKey)
     
         // verify signature: left
         req.body = JSON.parse(jsonData)

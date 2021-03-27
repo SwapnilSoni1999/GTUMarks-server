@@ -40,8 +40,8 @@ app.response.encSend = async function(data) {
     if (!xKey) {
         return this.status(403).json({ message: "No key provided!" })
     }
-    const aesKey = await cipher.RSAdecrypt(xKey)    
-    const cipherData = await cipher.AESencrypt(JSON.stringify(data), aesKey)
+    const aesKey = cipher.RSAdecrypt(xKey)    
+    const cipherData = cipher.AESencrypt(JSON.stringify(data), aesKey)
 
     this.setHeader('Content-Type', 'application/encrypted-json')
     // application/encrypted-json

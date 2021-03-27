@@ -53,6 +53,3 @@ app.listen(PORT, () => {
 })
 
 module.exports = app
-
-//remove later
-cipher.RSAencrypt('abcdefghijklmnop').then(xkey => console.log("X-Key", xkey ))

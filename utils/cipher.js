@@ -15,9 +15,13 @@ exports.RSAencrypt = (data) => {
 }
 
 exports.RSAdecrypt = (data) => {
-    const buffer = Buffer.from(data, "base64")
-    const decrypted = crypto.privateDecrypt({ key: privateKey, padding: crypto.constants.RSA_PKCS1_PADDING }, buffer)
-    return decrypted.toString('utf8')
+    try {
+        const buffer = Buffer.from(data, "base64")
+        const decrypted = crypto.privateDecrypt({ key: privateKey, padding: crypto.constants.RSA_PKCS1_PADDING }, buffer)
+        return decrypted.toString('utf8')
+    } catch (err) {
+        throw new Error('Invalid key!')
+    }
 }
 
 exports.AESencrypt = (data, key) => {
@@ -30,10 +34,14 @@ exports.AESencrypt = (data, key) => {
 }
 
 exports.AESdecrypt = (data, key) => {
-    const decipher = crypto.createDecipheriv('aes-128-cbc', key, AESiv)
-    const decrypted = Buffer.concat([ 
-        decipher.update(data, 'base64'),
-        decipher.final()
-    ])
-    return decrypted.toString('utf8')
+    try {
+        const decipher = crypto.createDecipheriv('aes-128-cbc', key, AESiv)
+        const decrypted = Buffer.concat([ 
+            decipher.update(data, 'base64'),
+            decipher.final()
+        ])
+        return decrypted.toString('utf8')
+    } catch(err) {
+        throw new Error('Invalid payload!')
+    }
 }

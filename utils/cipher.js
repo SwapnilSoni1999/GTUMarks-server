@@ -15,25 +15,37 @@ exports.RSAencrypt = (data) => {
 }
 
 exports.RSAdecrypt = (data) => {
-    const buffer = Buffer.from(data, "base64")
-    const decrypted = crypto.privateDecrypt({ key: privateKey, padding: crypto.constants.RSA_PKCS1_PADDING }, buffer)
-    return decrypted.toString('utf8')
+    try {
+        const buffer = Buffer.from(data, "base64")
+        const decrypted = crypto.privateDecrypt({ key: privateKey, padding: crypto.constants.RSA_PKCS1_PADDING }, buffer)
+        return decrypted.toString('utf8')
+    } catch (err) {
+        console.log('util error')
+    }
 }
 
 exports.AESencrypt = (data, key) => {
+   try {
     const cipher = crypto.createCipheriv('aes-128-cbc', key, AESiv)
     const encrypted = Buffer.concat([
         cipher.update(data, 'utf8'),
         cipher.final()
     ])
     return encrypted.toString('base64')
+   } catch (err) {
+	console.log('aes cipher error')
+   }
 }
 
 exports.AESdecrypt = (data, key) => {
+  try {
     const decipher = crypto.createDecipheriv('aes-128-cbc', key, AESiv)
     const decrypted = Buffer.concat([ 
         decipher.update(data, 'base64'),
         decipher.final()
     ])
     return decrypted.toString('utf8')
+  } catch (err) {
+    console.log('aes error')
+  }
 }

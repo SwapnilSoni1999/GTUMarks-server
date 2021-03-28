@@ -20,7 +20,7 @@ const decryptMiddleware = async (req, res, next) => {
             req.body = JSON.parse(jsonData)
             return next()
         } catch (err) {
-            return res.status(401).json({ message: "Access denied!", reason: "Invalid key!" })
+            return res.status(401).json({ message: "Access denied!", reason: err.message })
         }
     } else {
         return next()

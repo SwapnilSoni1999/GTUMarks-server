@@ -9,8 +9,13 @@ const decryptMiddleware = async (req, res, next) => {
                 return res.status(403).json({ message: "No key provided!" })
             }
             const aesKey = cipher.RSAdecrypt(xKey)
+		if (!aesKey) {
+			throw new Error('Invalid aes key')
+		}
             const jsonData = cipher.AESdecrypt(payload, aesKey)
-        
+        	if (!jsonData) {
+			throw new Error('Invalid payload')
+		}
             // verify signature: left
             req.body = JSON.parse(jsonData)
             return next()

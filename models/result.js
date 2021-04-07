@@ -24,6 +24,7 @@ const ResultSchema = new Schema({
     CourseName: { type: String, required: true },
     ExamNumber: { type: String, required: true }, // seat number
     BR_CODE: { type: Number },
+    BR_NAME: { type: String, required: false },
     TOTBACKL: { type: Number },
     CURBACKL: { type: Number },
     SPI: { type: Number, min: 0, max: 10, required: true },
